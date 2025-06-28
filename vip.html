@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voitures VIP - MKS Auto</title>
+    <link rel="stylesheet" href="vip.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logomks.png" alt="MKS Auto Logo">
+            </div>
+            <div class="burger">&#9776;</div>
+            <nav class="nav">
+                <a href="index.html">Accueil</a>
+                <a href="catalogue.html">Catalogue</a>
+                <a href="a-propos.html">À propos</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="vip-section">
+            <h1>Nos Voitures VIP</h1>
+            <div class="vip-cars">
+                <div class="car-card">
+                    <img src="vip1.jpg" alt="Mercedes Classe S">
+                    <h2>Mercedes Classe S</h2>
+                    <p>Luxe, confort et performance. Idéale pour les déplacements prestigieux.</p>
+                    <button onclick="ajouterAuPanier('Mercedes Classe S', 'vip1.jpg')">Réserver</button>
+
+                </div>
+
+                <div class="car-card">
+                    <img src="vip2.jpg" alt="BMW Série 7">
+                    <h2>BMW Série 7</h2>
+                    <p>Élégance moderne avec équipements haut de gamme et chauffeur privé.</p>
+                    <button onclick="ajouterAuPanier('Mercedes Classe S', 'vip2.jpg')">Réserver</button>
+
+                </div>
+
+                <div class="car-card">
+                    <img src="vip3.jpg" alt="Range Rover Vogue">
+                    <h2>Range Rover Vogue</h2>
+                    <p>Robuste, classe et sophistiqué pour vos déplacements VIP.</p>
+                    <button onclick="ajouterAuPanier('Mercedes Classe S', 'vip3.jpg')">Réserver</button>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 MKS Auto. Tous droits réservés.</p>
+    </footer>
+
+    <script src="vip.js"></script>
+</body>
+</html>

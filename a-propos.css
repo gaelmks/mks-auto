@@ -1,0 +1,230 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: url('logomks.png') no-repeat center center fixed;
+    background-size: contain;
+    background-color: #000;
+    color: #fff;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: -1;
+}
+
+
+header {
+    background-color: rgb(197, 194, 194); /* couleur trop opaque */
+    padding: 20px 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+header.transparent {
+    background-color: rgba(255, 255, 255, 0.7); /* fond semi-transparent */
+    backdrop-filter: blur(5px); /* optionnel : effet de flou */
+}
+
+/* Affichage par défaut : menu visible, burger caché */
+.burger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+/* Responsive pour petits écrans */
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+        color: #000;
+    }
+
+    .nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        gap: 10px;
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav.active {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px;
+}
+
+.nav a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #0071e3;
+}
+
+/* Sous menu*/
+/* Structure globale */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Sous-menu masqué par défaut */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    z-index: 1000;
+    padding: 10px 0;
+    flex-direction: column;
+    transition: opacity 0.3s ease;
+}
+
+/* Lorsqu'on survole .dropdown, on affiche le sous-menu */
+.dropdown:hover .submenu {
+    display: flex;
+}
+
+/* Lien du sous-menu */
+.submenu a {
+    display: block;
+    padding: 10px 20px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.submenu a:hover {
+    background-color: #f0f0f0;
+}
+main {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.apropos-section {
+    background-color: rgba(255, 255, 255, 0.05); /* ultra transparent */
+    backdrop-filter: blur(8px); /* flou sur l’image de fond */
+    -webkit-backdrop-filter: blur(8px);
+    padding: 60px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    margin-top: 40px;
+    color: #fff;
+}
+
+
+.apropos-section h1 {
+    font-size: 32px;
+    color: #ffff;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.apropos-section h2 {
+    font-size: 24px;
+    color: #222;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-left: 4px solid #0071e3;
+    padding-left: 12px;
+}
+
+.apropos-section p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.apropos-section ol {
+    padding-left: 20px;
+    margin-top: 10px;
+    color: #444;
+}
+
+.apropos-section ol li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.content {
+    background-color: rgba(0, 0, 0, 0.6); /* fond foncé transparent */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.content h2 {
+    color: #ffffff;
+    border-left: 4px solid #0071e3;
+    padding-left: 12px;
+}
+
+.content p,
+.content ol {
+    color: #ddd;
+}
+
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: #222;
+    color: #ccc;
+    font-size: 14px;
+}
+
+
+/* Animation lors de l’apparition des sections */
+.section.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

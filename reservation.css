@@ -1,0 +1,220 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+header {
+    background-color: rgb(197, 194, 194);
+    padding: 20px 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+header.transparent {
+    background-color: rgba(255, 255, 255, 0.7); /* fond semi-transparent */
+    backdrop-filter: blur(5px); /* optionnel : effet de flou */
+}
+
+/* Affichage par défaut : menu visible, burger caché */
+.burger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+/* Responsive pour petits écrans */
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+        color: #000;
+    }
+
+    .nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        gap: 10px;
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav.active {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px;
+    filter: brightness(3) contrast(0.8); /* éclaircissement */
+    opacity: 0.9;
+}
+
+
+.nav a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #0071e3;
+}
+
+/* Sous menu*/
+/* Structure globale */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Sous-menu masqué par défaut */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    z-index: 1000;
+    padding: 10px 0;
+    flex-direction: column;
+    transition: opacity 0.3s ease;
+}
+
+/* Lorsqu'on survole .dropdown, on affiche le sous-menu */
+.dropdown:hover .submenu {
+    display: flex;
+}
+
+/* Lien du sous-menu */
+.submenu a {
+    display: block;
+    padding: 10px 20px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.submenu a:hover {
+    background-color: #f0f0f0;
+}
+
+.intro {
+    padding: 10px;
+    width: 90%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Responsive : mobile (<768px) */
+@media (max-width: 768px) {
+    .dropdown {
+        width: 100%;
+    }
+
+    .submenu {
+        display: none;
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+        padding-left: 20px;
+        flex-direction: column;
+    }
+
+    .dropdown:hover .submenu,
+    .submenu:hover {
+        display: flex;
+    }
+
+    .submenu a {
+        padding: 8px 0;
+    }
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+#liste-voitures {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.voiture {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+}
+
+.voiture img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.voiture h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.supprimer-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.actions button {
+    background-color: #0071e3;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 0 10px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.actions button:first-child {
+    background-color: #777;
+}

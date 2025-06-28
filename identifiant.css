@@ -1,0 +1,202 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+}
+
+header {
+    background-color: rgb(197, 194, 194);
+    padding: 20px 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+header.transparent {
+    background-color: rgba(255, 255, 255, 0.7); /* fond semi-transparent */
+    backdrop-filter: blur(5px); /* optionnel : effet de flou */
+}
+
+/* Sous menu*/
+/* Structure globale */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Sous-menu masqué par défaut */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    z-index: 1000;
+    padding: 10px 0;
+    flex-direction: column;
+    transition: opacity 0.3s ease;
+}
+
+/* Lorsqu'on survole .dropdown, on affiche le sous-menu */
+.dropdown:hover .submenu {
+    display: flex;
+}
+
+/* Lien du sous-menu */
+.submenu a {
+    display: block;
+    padding: 10px 20px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.submenu a:hover {
+    background-color: #f0f0f0;
+}
+
+.intro {
+    padding: 10px;
+    width: 90%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Responsive : mobile (<768px) */
+@media (max-width: 768px) {
+    .dropdown {
+        width: 100%;
+    }
+
+    .submenu {
+        display: none;
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+        padding-left: 20px;
+        flex-direction: column;
+    }
+
+    .dropdown:hover .submenu,
+    .submenu:hover {
+        display: flex;
+    }
+
+    .submenu a {
+        padding: 8px 0;
+    }
+}
+/* Affichage par défaut : menu visible, burger caché */
+.burger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+/* Responsive pour petits écrans */
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+        color: #000;
+    }
+
+    .nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        gap: 10px;
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav.active {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px;
+}
+
+.nav a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #0071e3;
+}
+h1 {
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 400px;
+    margin: auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    text-align: left;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 12px;
+    background-color: #0071e3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: #222;
+    color: #ccc;
+    font-size: 14px;
+}

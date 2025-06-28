@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="identifiant.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <title>MKS Auto</title>
+</head>
+<body>
+     <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logomks.png" alt="MKS Auto Logo">
+            </div>
+            <div class="burger">&#9776;</div>
+           <nav class="nav">
+    <a href="index.html">Accueil</a>
+    <div class="dropdown">
+        <a href="catalogue.html">Catalogue</a>
+        <div class="submenu">
+            <a href="#">Voiture standard</a>
+            <a href="#">Voiture VIP</a>
+            <a href="#">Voiture grande place</a>
+            <a href="#">Camion</a>
+        </div>
+    </div>
+    <a href="reservation.html">Reservation</a>
+    <a href="#">Contactez-nous</a>
+</nav>
+        </div>
+    </header>
+    <main>
+ <h1>Confirmez votre réservation</h1>
+
+    <form id="form-coordonnees">
+        <label>Nom :
+            <input type="text" id="nom" required>
+        </label>
+        <label>Email :
+            <input type="email" id="email" required>
+        </label>
+        <label>Téléphone :
+            <input type="tel" id="telephone" required>
+        </label>
+        <label>adresse :
+            <input type="adressse" id="adresse" required>
+        </label>
+        <label>Date de livraison :
+        <input type="date" id="date" required>
+    </label>
+    <label>Heure de livraison :
+        <input type="time" id="heure" required>
+    </label>
+        <button type="submit">Confirmer</button>
+    </form>
+<script>
+    window.onload = function () {
+        document.getElementById("form-coordonnees").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const jsPDF = window.jspdf.jsPDF;
+
+            const nom = document.getElementById("nom").value;
+            const email = document.getElementById("email").value;
+            const tel = document.getElementById("telephone").value;
+            const adresse = document.getElementById("adresse").value;
+            const date = document.getElementById("date").value;
+            const heure = document.getElementById("heure").value;
+
+            const voitures = JSON.parse(localStorage.getItem("voituresReservees")) || [
+                { nom: "Exemple - Mercedes GLE" },
+                { nom: "Exemple - Audi Q7" }
+            ];
+
+            const doc = new jsPDF();
+            const logoBase64 = await toDataURL("logomks.png");
+
+            doc.setFillColor(255, 255, 255);
+            doc.rect(0, 0, 210, 297, "F");
+
+            // Petit logo en haut
+            doc.addImage(logoBase64, 'PNG', 10, 10, 40, 20);
+
+            doc.setFontSize(18);
+            doc.text("Confirmation de réservation - MKS Auto", 50, 25);
+
+            doc.setFontSize(12);
+            doc.text(`Nom : ${nom}`, 20, 50);
+            doc.text(`Email : ${email}`, 20, 60);
+            doc.text(`Téléphone : ${tel}`, 20, 70);
+            doc.text(`Adresse du domicile : ${adresse}`, 20, 80);
+            doc.text(`Date de réservation : ${date}`, 20, 90);
+            doc.text(`Heure de réservation : ${heure}`, 20, 100);
+
+            let y = 110;
+            voitures.forEach((voiture, i) => {
+                doc.text(`${i + 1}. ${voiture.nom}`, 20, y);
+                y += 10;
+            });
+
+            const pdfBlob = doc.output("blob");
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            window.open(pdfUrl, "_blank");
+        });
+
+        function toDataURL(url) {
+            return fetch(url)
+                .then(response => response.blob())
+                .then(blob => new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(blob);
+                }));
+        }
+    };
+    //rendre l'entete transparent
+window.addEventListener("scroll", function () {
+    const header = document.querySelector("header");
+    if (window.scrollY > 50) {
+        header.classList.add("transparent");
+    } else {
+        header.classList.remove("transparent");
+    }
+});
+//Mettre le menu burger
+document.addEventListener("DOMContentLoaded", function () {
+    const burger = document.querySelector(".burger");
+    const nav = document.querySelector(".nav");
+
+    burger.addEventListener("click", function () {
+        nav.classList.toggle("active");
+    });
+});
+</script>
+    <footer>
+        <p>© 2025 MKS Auto</p>
+    </footer>
+     
+</body>
+</html>

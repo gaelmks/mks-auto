@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Réservation - MKS Auto</title>
+    <link rel="stylesheet" href="reservation.css">
+</head>
+<body>
+     <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logomks.png" alt="MKS Auto Logo">
+            </div>
+            <div class="burger">&#9776;</div>
+           <nav class="nav">
+    <a href="index.html">Accueil</a>
+    <div class="dropdown">
+        <a href="catalogue.html">Catalogue</a>
+        <div class="submenu">
+            <a href="#">Voiture standard</a>
+            <a href="#">Voiture VIP</a>
+            <a href="#">Voiture grande place</a>
+            <a href="#">Camion</a>
+        </div>
+    </div>
+    <a href="reservation.html">Reservation</a>
+    <a href="#">Contactez-nous</a>
+</nav>
+        </div>
+    </header>
+    <h1>Vos véhicules réservés</h1>
+    <div id="liste-voitures"></div>
+
+    <script >
+    const liste = document.getElementById("liste-voitures");
+    let voitures = JSON.parse(localStorage.getItem("voituresReservees")) || [];
+
+    function afficherVoitures() {
+        liste.innerHTML = "";
+
+        if (voitures.length === 0) {
+            liste.innerHTML = "<center><p>Aucun véhicule réservé pour le moment.</p></center>";
+            return;
+        }
+
+        voitures.forEach((voiture, index) => {
+            const card = document.createElement("div");
+            card.className = "voiture";
+
+            card.innerHTML = `
+                <img src="${voiture.image}" alt="${voiture.nom}">
+                <h2>${voiture.nom}</h2>
+                <button class="supprimer-btn" onclick="supprimerVoiture(${index})">Supprimer</button>
+            `;
+
+            liste.appendChild(card);
+        });
+    }
+
+    function supprimerVoiture(index) {
+        voitures.splice(index, 1);
+        localStorage.setItem("voituresReservees", JSON.stringify(voitures));
+        afficherVoitures();
+    }
+
+    afficherVoitures();
+    function toutEffacer() {
+    if (confirm("Voulez-vous vraiment supprimer toutes les réservations ?")) {
+        localStorage.removeItem("voituresReservees");
+        voitures = [];
+        afficherVoitures();
+    }
+}
+
+function confirmerReservation() {
+    if (voitures.length === 0) {
+        alert("Aucune voiture à confirmer !");
+        return;
+    }
+
+    // On enregistre la liste actuelle pour qu’elle soit lue sur identifiant.html
+    localStorage.setItem("voituresSelectionnees", JSON.stringify(voitures));
+    window.location.href = "identifiant.html";
+}
+
+</script>
+
+<div class="actions">
+    <button onclick="toutEffacer()">Tout effacer</button>
+    <button onclick="confirmerReservation()">Confirmer</button>
+</div>
+
+</body>
+</html>
